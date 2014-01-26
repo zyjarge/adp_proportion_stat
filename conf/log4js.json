@@ -1,0 +1,14 @@
+{
+    "appenders": [
+        {
+            "type": "console"
+        },
+        {
+            "type": "file",
+            "filename": "../log/runtime.log",
+            "maxLogSize": 2048,
+            "category": "default"
+        }
+    ],
+    "replaceConsole": true
+}
