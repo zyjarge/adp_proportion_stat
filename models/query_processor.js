@@ -4,7 +4,7 @@
  */
 
 var mysql = require("mysql");
-var config = require("../config.json");
+var config = require("../conf/config.json");
 var async = require("async")
 var logger = require("./logger.js").getLogger;
 

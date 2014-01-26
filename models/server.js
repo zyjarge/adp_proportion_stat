@@ -2,7 +2,7 @@
  * Created by zhangyong on 14-1-23.
  */
 var http = require('http');
-var config = require('../config.json');
+var config = require('../conf/config.json');
 var request_handler = require('./request_handler');
 var logger = require('./logger').getLogger;
 

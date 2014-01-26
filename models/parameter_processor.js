@@ -11,7 +11,7 @@
  * Created by zhangyong on 14-1-23.
  */
 
-var config = require("../config");
+var config = require("../conf/config");
 
 var pc_adp = config.pc_adp;
 var mobile_adp = config.mobile_adp;
