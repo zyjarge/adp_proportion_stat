@@ -15,14 +15,14 @@ function error(error_info) {
     result.status = "error";
     result.info = error_info;
     result.proportion = "";
-    return JSON.stringify(result);
+    return JSON.stringify(result, null, 4);
 }
 
 function success(proportion) {
     result.status = "ok";
     result.info = "query success!";
     result.proportion = proportion;
-    return JSON.stringify(result,null,4);
+    return JSON.stringify(result, null, 4);
 }
 exports.error = error;
 exports.success = success;

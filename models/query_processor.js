@@ -6,15 +6,16 @@
 var mysql = require("mysql");
 var config = require("../config.json");
 var async = require("async")
+var logger = require("./logger.js").getLogger;
 
 function query_proportion(query_type, adp_id, area_arr, cb) {
     var connection = mysql.createConnection(config.db_info);
     connection.connect(function (err) {
         if (err) {
-            console.log("Error:" + err);
+            logger.error("Error:" + err);
             throw err;
         }
-        console.log("DB Connect Success!!!");
+        logger.info("DB Connect Success!!!");
         connectOnReady();
     });
 
@@ -24,12 +25,12 @@ function query_proportion(query_type, adp_id, area_arr, cb) {
         var proportion_type = query_type === "pla" ? "pla_proportion" : "brw_proportion";
         var sql_query = "select day_type,area_id,sum(" + proportion_type + ") as prop from stg_ad_inventory_proportion where area_id = ? and adp_id in (?) group by day_type";
         async.mapSeries(area_arr, function (area_id, callback) {
-            console.log("Query Area:" + area_id);
-            console.log("Query adp_id:" + adp_id);
+            logger.info("Query Area:" + area_id);
+            logger.info("Query adp_id:" + adp_id);
 
             connection.query(sql_query, [area_id, adp_id], function (err, rows, fields) {
                     if (err) {
-                        console.log("Error: " + err);
+                        logger.error("Error: " + err);
                         connection.end();
                         throw err;
                     }

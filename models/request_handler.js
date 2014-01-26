@@ -6,6 +6,7 @@
 var json_processor = require("./json_processor");
 var parameter_processor = require("./parameter_processor");
 var query_processor = require("./query_processor")
+var logger = require('./logger').getLogger;
 
 function handle_request(req, res) {
 
@@ -20,8 +21,8 @@ function handle_request(req, res) {
         try {
             var jsonObj = JSON.parse(postData);
         } catch (er) {
-            console.log("Parsing Json error:" + er);
-            consoled.log(postData);
+            logger.error("Parsing Json error:" + er);
+            logger.error(postData);
             res.end(json_processor.error("parsing json error "));
             return;
         }
@@ -30,6 +31,8 @@ function handle_request(req, res) {
 //        解析postData
         var adp_type = parameter_processor.validate_parameter(adp_array);
         if (adp_type === "err") {
+            logger.error("Validate parameter error: adp ids aren't all same type.");
+            logger.error("Error adps:" + adp_array);
             res.end(json_processor.error("adp type error:" + adp_array.join(",")));
             return;
         }
